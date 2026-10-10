@@ -18,7 +18,11 @@ cross.addEventListener('click',()=>{
     form.style.display = 'none'
 })
 
-let productArr = []
+let productArr = JSON.parse(localStorage.getItem("product")) || [];
+console.log(productArr)
+
+
+
 
 let updateIndex = null;
 
@@ -44,6 +48,7 @@ let ui = ()=>{
 
     
 }
+ui()
 
 formO.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -68,10 +73,14 @@ formO.addEventListener('submit',(e)=>{
 
     if(updateIndex !== null){
         productArr[updateIndex] = obj;
+        localStorage.setItem("product",JSON.stringify(productArr))
         updateIndex = null;
+
     }else{
         
         productArr.push(obj);
+        localStorage.setItem("product",JSON.stringify(productArr))
+
     }
     
     ui();
@@ -98,3 +107,8 @@ const del =(index)=>{
     productArr.splice(index,1);
     ui()
 }
+
+
+
+
+
